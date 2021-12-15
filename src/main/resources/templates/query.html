@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    查询成功
+    <table>
+        <tr th:each="batch:${batchList}">
+            <td th:text="${batch.getId()}"></td>
+            <td th:text="${batch.getBatch_name()}"></td>
+            <td th:text="${batch.getBuild_date()}"></td>
+            <td th:text="${batch.getItem_name()}"></td>
+        </tr>
+    </table>
+</body>
+</html>
