@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.security.dao.FilePathDao">
+    <resultMap id="result" type="com.spring.security.entity.FilePath">
+        <result column="userId" property="userId" jdbcType="INTEGER" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+    </resultMap>
+    <insert id="addFilePath">
+        insert into file_path (userId,path) values (#{userId},#{path});
+    </insert>
+
+    <select id="getPathByUserId" resultType="String" parameterType="Integer">
+        select path from file_path where userId = #{userId};
+    </select>
+
+    <delete id="deleteFilePath">
+        delete from file_path where userId = #{userId};
+    </delete>
+</mapper>

@@ -12,9 +12,13 @@ public interface TeacherDao {
 
     Teacher queryTeacherById(int id);
 
+    Teacher queryTeacherByName(String name);
+
     int addTeacher(Teacher teacher);
 
     int updateTeacher(Teacher teacher);
 
     int deleteTeacher(Teacher teacher);
+
+    int getTeacherIdByName(String name);
 }

@@ -14,7 +14,7 @@
         select * from batch;
     </select>
 
-    <select id="queryBatchById" parameterType="int">
-        select * from batch where id = #{id}
+    <select id="queryBatchByBatchName" parameterType="String" resultMap="result">
+        select * from batch where batch_name = #{batch_name}
     </select>
 </mapper>
