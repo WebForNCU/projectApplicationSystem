@@ -12,7 +12,7 @@
     <select id="queryById" resultMap="SysPermissionMap">
         select
           id, permission_code, permission_name
-        from sys_permission
+        from logininfo.sys_permission
         where id = #{id}
     </select>
 
@@ -20,7 +20,7 @@
     <select id="queryAllByLimit" resultMap="SysPermissionMap">
         select
           id, permission_code, permission_name
-        from sys_permission
+        from logininfo.sys_permission
         limit #{offset}, #{limit}
     </select>
 
@@ -28,7 +28,7 @@
     <select id="queryAll" resultMap="SysPermissionMap">
         select
           id, permission_code, permission_name
-        from sys_permission
+        from logininfo.sys_permission
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -44,13 +44,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sys_permission(permission_code, permission_name)
+        insert into logininfo.sys_permission(permission_code, permission_name)
         values (#{permissionCode}, #{permissionName})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update sys_permission
+        update logininfo.sys_permission
         <set>
             <if test="permissionCode != null and permissionCode != ''">
                 permission_code = #{permissionCode},
@@ -64,20 +64,20 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from sys_permission where id = #{id}
+        delete from logininfo.sys_permission where id = #{id}
     </delete>
     <select id="selectListByUser" resultMap="SysPermissionMap">
         SELECT
         p.*
         FROM
-        sys_user AS u
-        LEFT JOIN sys_user_role_relation AS ur
+        logininfo.sys_user AS u
+        LEFT JOIN logininfo.sys_user_role_relation AS ur
         ON u.id = ur.user_id
-        LEFT JOIN sys_role AS r
+        LEFT JOIN logininfo.sys_role AS r
         ON r.id = ur.role_id
-        LEFT JOIN sys_role_permission_relation AS rp
+        LEFT JOIN logininfo.sys_role_permission_relation AS rp
         ON r.id = rp.role_id
-        LEFT JOIN sys_permission AS p
+        LEFT JOIN logininfo.sys_permission AS p
         ON p.id = rp.permission_id
         WHERE u.id = #{userId}
     </select>
@@ -85,9 +85,9 @@
         SELECT
             pe.*
         FROM
-            sys_permission pe
-        LEFT JOIN sys_request_path_permission_relation re ON re.permission_id = pe.id
-        LEFT JOIN sys_request_path pa ON pa.id = re.url_id
+            logininfo.sys_permission pe
+        LEFT JOIN logininfo.sys_request_path_permission_relation re ON re.permission_id = pe.id
+        LEFT JOIN logininfo.sys_request_path pa ON pa.id = re.url_id
         WHERE pa.url = #{path}
     </select>
 

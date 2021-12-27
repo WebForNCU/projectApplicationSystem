@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!-- resultMap最终还是要将结果映射到pojo上，type就是指定映射到哪一个pojo -->
+        <!-- id：设置ResultMap的id -->
+<!DOCTYPE mapper
+        PUBLIC ".//mybatis.org//DTD MAPPER 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.security.dao.TableTeachDao">
+
+    <resultMap type="com.spring.security.entity.TableTeach" id="queryTableTeachById">
+        <!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
+        <!-- property：主键在pojo中的属性名 -->
+        <!-- column：主键在数据库中的列名 -->
+        <id property="id" column="id" />
+        <!-- 定义普通属性 -->
+        <result property="table_teach_name" column="table_teach_name" />
+        <result property="table_name" column="table_name" />
+        <result property="table_teacher_describe" column="table_teacher_describe" />
+        <result property="table_describe" column="table_describe" />
+        <result property="audit" column="audit" />
+        <result property="src" column="src" />
+    </resultMap>
+
+    <select id="queryTableTeachList" resultMap="queryTableTeachById">
+        select * from logininfo.tableteach where table_name= #{table_name}
+    </select>
+
+    <select id="queryTableTeachID" resultType="java.lang.Integer">
+        select max(id) from logininfo.tableteach
+    </select>
+
+    <insert id="addTableTeach" parameterType="com.spring.security.entity.TableTeach">
+        insert into logininfo.tableteach( id,table_teach_name,table_name,table_teacher_describe,table_describe,audit,src) values ( #{id},#{table_teach_name},#{table_name},#{table_teacher_describe},#{table_describe},#{audit},#{src})
+    </insert>
+
+    <select id="queryTableTeachById" resultMap="queryTableTeachById">
+        select id,table_teach_name,table_name,table_teacher_describe,table_describe from logininfo.tableteach where id = #{id}
+    </select>
+
+
+    <update id="updateTableTeachDate" parameterType="com.spring.security.entity.TableTeach">
+        update logininfo.tableteach set table_teach_name=#{table_teach_name},table_name=#{table_name},table_teacher_describe=#{table_teacher_describe},table_describe=#{table_describe} where id=#{id}
+    </update>
+
+
+    <delete id="deleteTableTeach" parameterType="com.spring.security.entity.TableTeach">
+        delete from logininfo.tableteach where table_teach_name=#{table_teach_name}
+    </delete>
+
+
+    <select id="queryTableTeachTableName" parameterType="java.lang.String" resultType="java.lang.String">
+        select table_name from logininfo.tableteach where table_teach_name = #{table_teach_name}
+    </select>
+
+    <select id="queryTableTeacherDescribe" parameterType="java.lang.String" resultType="java.lang.String">
+        select table_teacher_describe from logininfo.tableteach where table_teach_name = #{table_teach_name}
+    </select>
+
+    <select id="queryTableNameDescribe" parameterType="java.lang.String" resultType="java.lang.String">
+        select table_describe from logininfo.tableteach where table_teach_name = #{table_teach_name}
+    </select>
+
+</mapper>

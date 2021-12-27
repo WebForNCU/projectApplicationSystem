@@ -89,7 +89,7 @@
                     </ul>
                 </li>
                 <li><a href=""><i class="icon-list"></i>报表查询与导出</a></li>
-                <li><a th:href="@{/toMyInformationPage}" ><i class="icon-user"></i>个人资料管理</a></li>
+                <li><a href=""><i class="icon-user"></i>个人资料管理</a></li>
                 </li>
             </ul>
         </div><!--nano content-->
@@ -115,6 +115,21 @@
     <!--主体页面头部结束-->
 
     <!--页面主体内容部分开始-->
+
+    <div>
+        <table>
+            <thead>
+            <pre>填写批次名字:</pre>
+            </thead>
+            <tbody>
+                <form th:action="@{/addbatch}">
+                    <label>批次名:</label>
+                    <input id="batch_name" placeholder="请输入批次名" required type="text" name="batch_name">
+                    <button type="submit">提交</button>
+                </form>
+            </tbody>
+        </table>
+    </div>
 
 
     <!--页面主体内容部分结束-->

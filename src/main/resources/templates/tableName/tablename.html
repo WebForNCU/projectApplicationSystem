@@ -89,7 +89,7 @@
                     </ul>
                 </li>
                 <li><a href=""><i class="icon-list"></i>报表查询与导出</a></li>
-                <li><a th:href="@{/toMyInformationPage}" ><i class="icon-user"></i>个人资料管理</a></li>
+                <li><a href=""><i class="icon-user"></i>个人资料管理</a></li>
                 </li>
             </ul>
         </div><!--nano content-->
@@ -115,6 +115,27 @@
     <!--主体页面头部结束-->
 
     <!--页面主体内容部分开始-->
+
+    <div>
+        <button><a th:href="@{/loginTableName/}+${Batchname}">增加表格</a></button>
+        <table>
+            <thead>
+            <pre> id                               表格名字                               批次信息</pre>
+            </thead>
+            <tbody>
+            <tr th:each="tableName:${tableNames}">
+                <td style="width: 300px" th:text="${tableName.id}"></td>
+                <td style="width: 300px" th:text="${tableName.table_name}"></td>
+                <td style="width: 300px" th:text="${tableName.batch_name}"></td>
+                <td>
+                    <button><a th:href="@{/logintableTeach/}+${tableName.table_name}" >进入</a></button>
+                    <button><a th:href="@{/updateTableName/}+${tableName.id}">编辑</a></button>
+                    <button><a th:href="@{/deleteTableName/}+${tableName.table_name}">删除</a></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 
     <!--页面主体内容部分结束-->

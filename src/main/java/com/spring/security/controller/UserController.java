@@ -138,6 +138,4 @@ public class UserController {
         System.out.println("注册成功返回登录");
         return "myLogin";
     }
-
-
 }

@@ -89,7 +89,7 @@
                     </ul>
                 </li>
                 <li><a href=""><i class="icon-list"></i>报表查询与导出</a></li>
-                <li><a th:href="@{/toMyInformationPage}" ><i class="icon-user"></i>个人资料管理</a></li>
+                <li><a href=""><i class="icon-user"></i>个人资料管理</a></li>
                 </li>
             </ul>
         </div><!--nano content-->
@@ -115,6 +115,26 @@
     <!--主体页面头部结束-->
 
     <!--页面主体内容部分开始-->
+
+    <div>
+        <button><a th:href="@{/loginbatch}">增加批次信息</a></button>
+        <table>
+            <thead>
+            <pre> id                               批次名字       </pre>
+            </thead>
+            <tbody>
+                <tr th:each="batch:${batches}">
+                    <td style="width: 300px" th:text="${batch.id}"></td>
+                    <td style="width: 300px" th:text="${batch.batch_name}"></td>
+                    <td>
+                        <button><a th:href="@{/logintableName/}+${batch.batch_name}">进入</a></button>
+                        <button><a th:href="@{/updatelist/}+${batch.id}">编辑</a></button>
+                        <button><a th:href="@{/deletelist/}+${batch.id}">删除</a></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
 
     <!--页面主体内容部分结束-->
@@ -152,3 +172,28 @@
 <script src="js/dashboard-alpha.js"></script>
 </body>
 </html>
+
+
+
+<!--  <div>
+        <table>
+            <thead>
+            <pre> id                               table_name       </pre>
+            </thead>
+            <tbody>
+            <tr th:each="batch:${batches}">
+                <td style="width: 300px" th:text="${batch.id}"></td>
+                <td style="width: 300px" th:text="${batch.batch_name}"></td>
+            </tr>
+            <form th:action="@{/updateByBatch})">
+                <tr th:each="batch:${batches}">
+                    <label>批次名:</label>
+                    <input id="id" placeholder="${batch.id}" required type="text" name="batch_name">
+                    <input id="batch_name" placeholder="${batch.batch_name}" required type="text" name="batch_name">
+                    <button>提交</button>
+                </tr>
+            </form>
+            </tbody>
+        </table>
+    </div>
+-->

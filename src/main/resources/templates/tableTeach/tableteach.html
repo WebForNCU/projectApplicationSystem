@@ -89,7 +89,7 @@
                     </ul>
                 </li>
                 <li><a href=""><i class="icon-list"></i>报表查询与导出</a></li>
-                <li><a th:href="@{/toMyInformationPage}" ><i class="icon-user"></i>个人资料管理</a></li>
+                <li><a href=""><i class="icon-user"></i>个人资料管理</a></li>
                 </li>
             </ul>
         </div><!--nano content-->
@@ -115,6 +115,26 @@
     <!--主体页面头部结束-->
 
     <!--页面主体内容部分开始-->
+    <div>
+        <button><a th:href="@{/loginTableTeach/}+${Table_teach}">教师填报</a></button>
+        <table>
+            <thead>
+            <pre> id                               教师名字                               表格名字</pre>
+            </thead>
+            <tbody>
+            <tr th:each="tableTeach:${tableTeachs}">
+                <td style="width: 300px" th:text="${tableTeach.id}"></td>
+                <td style="width: 300px" th:text="${tableTeach.table_teach_name}"></td>
+                <td style="width: 300px" th:text="${tableTeach.table_name}"></td>
+                <td>
+                    <button><a th:href="@{/Getexcel/}+${tableTeach.table_teach_name}">导出报表</a></button>
+                    <button><a th:href="@{/updateTableTeach/}+${tableTeach.id}">编辑</a></button>
+                    <button><a th:href="@{/deleteTableTeach/}+${tableTeach.table_teach_name}">删除</a></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 
     <!--页面主体内容部分结束-->

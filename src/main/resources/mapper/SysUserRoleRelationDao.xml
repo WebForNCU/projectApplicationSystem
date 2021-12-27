@@ -12,14 +12,14 @@
     <select id="queryRoleIdByUserId" resultMap="SysUserRoleRelationMap">
         select
             id, role_id, role_id
-        from sys_user_role_relation
+        from logininfo.sys_user_role_relation
         where user_id = #{userId}
     </select>
 
     <!--插入-->
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into sys_user_role_relation(user_id, role_id)
+        insert into logininfo.sys_user_role_relation(user_id, role_id)
         values (#{userId}, #{roleId})
     </insert>
 </mapper>
