@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC ".//mybatis.org//DTD MAPPER 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.security.dao.MyInformationDao">
+
+    <select id="queryInformationByNickname" resultType="MyInformation" parameterType="String">
+        select * from logininfo.my_information where nickname=#{nickname}
+    </select>
+
+    <update id="updateInformationByNickname" parameterType="MyInformation">
+        update logininfo.my_information set name=#{name}, age=#{age}, idNumber=#{idNumber}, email=#{email}
+        where nickname=#{nickname}
+    </update>
+
+    <select id="queryNickname" parameterType="String" resultType="MyInformation">
+        select * from logininfo.my_information where nickname=#{nickname}
+    </select>
+
+    <update id="registerNickname" parameterType="String">
+        insert into logininfo.my_information(nickname) value (#{nickname})
+    </update>
+
+</mapper>

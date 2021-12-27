@@ -22,5 +22,10 @@ public class SysUserRoleRelationServiceImpl implements SysUserRoleRelationServic
         sysUserRoleRelationDao.insert(sysUserRoleRelation);
     }
 
+    @Override
+    public void delete(Integer userId) {
+        sysUserRoleRelationDao.delete(userId);
+    }
+
 
 }

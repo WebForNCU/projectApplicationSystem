@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!--font-family-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext"
+          rel="stylesheet">
+
+    <!-- title of site -->
+    <title>忘记密码</title>
+
+    <!-- For favicon png -->
+    <link href="/assets/login/logo/favicon.png" rel="shortcut icon" type="image/icon"/>
+
+    <!--font-awesome.min.css-->
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <!--animate.css-->
+    <link href="/assets/css/animate.css" rel="stylesheet">
+
+    <!--bootstrap.min.css-->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- bootsnav -->
+    <link href="/assets/css/bootsnav.css" rel="stylesheet">
+
+    <!--style.css-->
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+    <!--responsive.css-->
+    <link href="/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+</head>
+
+<body >
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a
+        href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- signin end -->
+<section class="signin signup">
+    <div class="container">
+        <div class="sign-content popup-in-content">
+            <div class="popup-in-txt">
+                <h2>忘记密码</h2>
+
+                <div class="signin-form">
+                    <!--表单 重置密码提交到/reset,并回到登录页面-->
+                    <form action="/reset" role="form" method="post">
+                        <div class="form-group">
+                            <label for="signin_form"><span class="glyphicon glyphicon-user"
+                                                           style="color: rgb(140, 132, 251);"></span> 角色</label>
+
+                            <select class="form-control" id="signin_form" required>
+                                <option value="user">用户</option>
+                                <option value="admin">管理员</option>
+                            </select>
+                        </div><!--/.form-group -->
+                        <div class="form-group">
+                            <label for="signin_form"> <span class="glyphicon glyphicon-phone"
+                                                            style="color: rgb(140, 132, 251);"></span>
+                                用户名</label>
+                            <input class="form-control" id="username" placeholder="请输入用户名" required
+                                   type="text" name="username">
+                        </div><!--/.form-group -->
+                        <div class="form-group">
+                            <label for="signin_form"><span class="glyphicon glyphicon-lock"
+                                                           style="color: rgb(140, 132, 251);"></span> 重置密码</label>
+                            <input class="form-control" id="password" name="password" placeholder="请输入重置密码密码" required
+                                   type="password">
+                        </div><!--/.form-group -->
+                        <div class="form-group">
+                            <label for="signin_form"><span class="glyphicon glyphicon-lock"
+                                                           style="color: rgb(140, 132, 251);"></span> 确认密码</label>
+                            <input class="form-control" id="password1" name="password1" placeholder="请再次输入密码" required
+                                   type="password">
+                        </div><!--/.form-group -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="signin-footer">
+                                    <button class="btn signin_btn signin_btn_two" data-target=".signin_modal" data-toggle="modal"
+                                    id="submit" onclick="return check();">
+                                        确认重置
+                                    </button>
+                                </div><!--/.signin-footer -->
+                            </div><!--/.col -->
+                        </div><!--/.row -->
+
+
+                    </form><!--/form -->
+                </div><!--/.signin-form -->
+                <!--							</div>&lt;!&ndash;/.col &ndash;&gt;-->
+                <!--						</div>&lt;!&ndash;/.row &ndash;&gt;-->
+
+
+            </div><!-- .popup-in-txt -->
+        </div><!--/.sign-content -->
+    </div><!--/.container -->
+</section><!--/.signin -->
+
+<!-- signin end -->
+
+<!--footer copyright start -->
+<footer class="footer-copyright">
+    <div id="scroll-Top">
+        <i aria-hidden="true" class="fa fa-angle-double-up return-to-top" data-original-title="Back to Top"
+           data-placement="top" data-toggle="tooltip" id="scroll-top" title=""></i>
+    </div><!--/.scroll-Top-->
+
+</footer><!--/.hm-footer-copyright-->
+<!--footer copyright  end -->
+
+
+<!-- Include all js compiled plugins (below), or include individual files as needed -->
+
+<script src="/assets/js/jquery.js"></script>
+
+<!--modernizr.min.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+<!--bootstrap.min.js-->
+<script src="/assets/js/bootstrap.min.js"></script>
+
+<!-- bootsnav js -->
+<script src="/assets/js/bootsnav.js"></script>
+
+<!-- jquery.sticky.js -->
+<script src="/assets/js/jquery.sticky.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+
+<!--Custom JS-->
+<script src="/assets/js/custom.js"></script>
+
+<!-- 配置json解析，将登陆信息发送给/login -->
+<script type="text/javascript">
+
+    function check() {
+        var username = $("#username").val();
+        var password1 = $("#password1").val();
+        var password2 = $("#password2").val();
+        if (password1 != password2)
+        {
+            alert("两次输入密码不一致！");
+            return false;
+        }
+         console.log(username);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: '/login',
+            contentType: "application/json",
+            data: JSON.stringify({
+                "username": "" + username,
+                "password": "" + password
+            }),
+            success: function (jsonData, result) {
+                console.log("data is :" + result);
+                if (jsonData["data"]["token"]) {
+                    localStorage.setItem("hcs", jsonData["data"]["token"]);
+                    window.location.href = "index.html";
+                } else {
+                    console.log(jsonData["data"]["token"]);
+                    alert("登录失败，请重试");
+                }
+            }
+        });
+    })
+</script>
+</body>
+
+</html>

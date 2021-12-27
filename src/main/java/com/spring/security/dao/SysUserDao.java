@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface SysUserDao {
 
+
+
     /**
      * 通过ID查询单条数据
      *
@@ -56,6 +58,12 @@ public interface SysUserDao {
     int update(SysUser sysUser);
 
     /**
+     * @description: 更新头像url
+     * @param sysUser
+     * @return: int
+     */
+    int updateImage(SysUser sysUser);
+    /**
      * 通过主键删除数据
      *
      * @param id 主键
@@ -70,4 +78,11 @@ public interface SysUserDao {
      * @return
      */
     SysUser selectByName(String userName);
+
+    /**
+     * @description:查询所有用户（非管理员）信息
+     * @param
+     * @return: java.util.List<com.spring.security.entity.SysUser>
+     */
+    List<SysUser> queryAllUsers();
 }
