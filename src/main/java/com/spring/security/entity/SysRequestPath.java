@@ -1,5 +1,7 @@
 package com.spring.security.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -8,8 +10,10 @@ import java.io.Serializable;
  * @author makejava
  * @since 2019-09-04 17:11:16
  */
+@Entity(name = "sys_request_path")
 public class SysRequestPath implements Serializable {
     private static final long serialVersionUID = -38398465698914714L;
+    @Id
     //主键id
     private Integer id;
     //请求路径

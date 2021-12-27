@@ -25,6 +25,8 @@ public class CustomizeLogoutSuccessHandler implements LogoutSuccessHandler {
        // httpServletResponse.setContentType("text/json;charset=utf-8");
         //httpServletResponse.getWriter().write(JSON.toJSONString(result));
 
+        //清除session对象中的所有信息
+        httpServletRequest.getSession().invalidate();
         //退出登录重新返回登录页面
         httpServletResponse.sendRedirect("login");
     }

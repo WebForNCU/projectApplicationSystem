@@ -17,4 +17,5 @@ public interface SysUserRoleRelationService {
      */
     void insert(SysUserRoleRelation sysUserRoleRelation);
 
+    void delete(Integer userId);
 }

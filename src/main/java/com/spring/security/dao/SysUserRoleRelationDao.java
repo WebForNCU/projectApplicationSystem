@@ -16,4 +16,11 @@ public interface SysUserRoleRelationDao {
      * @return: com.spring.security.entity.SysUserRoleRelation
      */
     void insert(SysUserRoleRelation sysUserRoleRelation);
+
+    /**
+     * @description:根据用户id删除
+     * @param userId
+     * @return: void
+     */
+    void delete(Integer userId);
 }

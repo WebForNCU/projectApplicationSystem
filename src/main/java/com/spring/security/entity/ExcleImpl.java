@@ -1,0 +1,133 @@
+package com.spring.security.entity;
+
+import org.apache.poi.hssf.usermodel.*;
+
+import javax.servlet.ServletOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ExcleImpl {
+    public void export(List<String> titles, List<String>teacher, ServletOutputStream out) throws Exception{
+        try{
+            // 第一步，创建一个workbook，对应一个Excel文件
+            HSSFWorkbook workbook = new HSSFWorkbook();
+
+            // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+            HSSFSheet hssfSheet = workbook.createSheet("sheet1");
+
+            // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+
+            HSSFRow row = hssfSheet.createRow(0);
+            // 第四步，创建单元格，并设置值表头 设置表头居中
+            HSSFCellStyle hssfCellStyle = workbook.createCellStyle();
+
+            //居中样式
+            hssfCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+            HSSFCell hssfCell = null;
+            for (int i = 0; i < titles.size(); i++) {
+                hssfCell = row.createCell(i);//列索引从0开始
+                hssfCell.setCellValue(titles.get(i));//列名1
+                hssfCell.setCellStyle(hssfCellStyle);//列居中显示
+            }
+
+
+                row = hssfSheet.createRow(1);
+                for(int i=0;i<teacher.size();i++){
+                    row.createCell(i).setCellValue(teacher.get(i));
+                }
+            // 第七步，将文件输出到客户端浏览器
+            try {
+                workbook.write(out);
+                out.flush();
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new Exception("导出信息失败！");
+
+        }
+    }
+    public void export1(List<TableTeach>  tableTeachs, ServletOutputStream out) throws Exception{
+        try{
+            // 第一步，创建一个workbook，对应一个Excel文件
+            HSSFWorkbook workbook = new HSSFWorkbook();
+
+            // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+            HSSFSheet hssfSheet = workbook.createSheet("sheet1");
+
+            // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+
+            HSSFRow row = hssfSheet.createRow(0);
+            // 第四步，创建单元格，并设置值表头 设置表头居中
+            HSSFCellStyle hssfCellStyle = workbook.createCellStyle();
+
+            //居中样式
+            hssfCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+
+            String Table_describe=tableTeachs.get(0).getTable_describe();
+            List<String> titles = new ArrayList<>();
+            String table_describe="";
+            for(int i=0;i<Table_describe.length();i++){
+                //  System.out.println(Table_describe.substring(i,i+1).equals("#"));
+                if(!(Table_describe.substring(i,i+1).equals("#"))){
+                    table_describe+=Table_describe.substring(i,i+1);
+                }else{
+                    titles.add(table_describe);
+                    table_describe="";
+                }
+            }
+
+
+
+
+
+            HSSFCell hssfCell = null;
+            hssfCell = row.createCell(0);//列索引从0开始
+            hssfCell.setCellValue("ID");//列名1
+            hssfCell.setCellStyle(hssfCellStyle);//列居中显示
+            for (int i = 0; i < titles.size(); i++) {
+                hssfCell = row.createCell(i+1);//列索引从0开始
+                hssfCell.setCellValue(titles.get(i));//列名1
+                hssfCell.setCellStyle(hssfCellStyle);//列居中显示
+            }
+
+
+            for(int i=0;i<tableTeachs.size();i++){
+                row = hssfSheet.createRow(i+1);
+                List<String> teacher =new ArrayList<>();
+                String Teach_table_describe=tableTeachs.get(i).getTable_teacher_describe();
+                String teach_table_describe="";
+                row.createCell(0).setCellValue(tableTeachs.get(i).getId());
+                for(int j=0;j<Teach_table_describe.length();j++){
+                    if(!(Teach_table_describe.substring(j,j+1).equals("#"))){
+                        teach_table_describe+=Teach_table_describe.substring(j,j+1);
+                    }else{
+                        teacher.add(teach_table_describe);
+                        teach_table_describe="";
+                    }
+                }
+                for(int j=0;j<teacher.size();j++){
+                    row.createCell(j+1).setCellValue(teacher.get(j));
+                }
+            }
+            // 第七步，将文件输出到客户端浏览器
+            try {
+                workbook.write(out);
+                out.flush();
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new Exception("导出信息失败！");
+
+        }
+    }
+}

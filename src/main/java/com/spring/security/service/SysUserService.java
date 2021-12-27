@@ -16,6 +16,7 @@ import java.util.List;
 public interface SysUserService {
 
 
+
     /**
      * 通过ID查询单条数据
      *
@@ -50,6 +51,12 @@ public interface SysUserService {
     SysUser update(SysUser sysUser);
 
     /**
+     * @description:修改头像url
+     * @param sysUser
+     * @return: com.spring.security.entity.SysUser
+     */
+    SysUser updateImage(SysUser sysUser);
+    /**
      * 通过主键删除数据
      *
      * @param id 主键
@@ -64,5 +71,13 @@ public interface SysUserService {
      * @return
      */
     SysUser selectByName(String userName);
+
+
+    /**
+     * @description:查询所有用户（非管理员）信息
+     * @param
+     * @return: java.util.List<com.spring.security.entity.SysUser>
+     */
+    List<SysUser> queryAllUsers();
 
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC ".//mybatis.org//DTD MAPPER 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.security.dao.BatchDao">
+
+    <select id="queryBacthList" resultType="com.spring.security.entity.Batch">
+        select * from batch
+    </select>
+
+    <select id="queryBacthID" resultType="java.lang.Integer">
+        select max(id) from batch
+    </select>
+
+    <select id="queryBacthById" resultType="com.spring.security.entity.Batch">
+        select * from batch where id = #{id}
+    </select>
+
+    <insert id="addBatch" parameterType="com.spring.security.entity.Batch">
+        insert into batch(id,batch_name) values ( #{id}, #{batch_name} )
+    </insert>
+
+    <update id="updateBatchDate" parameterType="com.spring.security.entity.Batch">
+        update batch set batch_name=#{batch_name} where id=#{id}
+    </update>
+
+    <delete id="deleteBatch" parameterType="com.spring.security.entity.Batch">
+        delete from batch where id=#{id}
+    </delete>
+
+    <update id="updateBatchDateExcel" parameterType="com.spring.security.entity.Batch">
+        update batch set boolexcel=#{boolexcel} where batch_name=#{batch_name}
+    </update>
+
+ <!--   <insert id="addBatch" parameterType="com.spring.security.entity.Batch">
+        insert into batch(id,data,batch_name,table_name) values ( #{id}, #{data}, #{batch_name}, #{table_name})
+    </insert>
+
+    <update id="updateBatchDate" parameterType="com.spring.security.entity.Batch">
+        update user set data=#{data} where id=#{id}
+    </update>
+
+    <update id="updateBatchName" parameterType="com.spring.security.entity.Batch">
+        update user set batch_name=#{batch_name} where id=#{id}
+    </update>    -->
+
+
+</mapper>

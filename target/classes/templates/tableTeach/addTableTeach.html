@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>信息填报系统</title>
+    <script src="webjars/jquery/3.5.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        var InputCount=0;
+        var describe=$("#table_describe").attr("value");
+        var len=describe.length;
+        var Describe="";
+        for(var i=0;i<len;i++){
+           if(describe[i]=='#'){
+                InputCount++;
+                $("#InputsWrapper").append('<p>'+Describe+':'+'</p>'+'<label></label><input type="text" name="news_' +  InputCount + '"' +'/><br/><br/>');
+                $("#len").attr('value',InputCount);
+                Describe="";
+            }else{
+                Describe+=describe[i];
+            }
+         }
+        });
+    </script>
+    <![endif]-->
+</head>
+<body>
+    <form method="post" th:action="@{/addTableTeach}">
+        <br/>
+        <p>请输入教师名字:</p>
+        <input type="text" name="table_teach_name" ><br/><br/>
+        <div id="InputsWrapper">
+        </div>
+        <input style="display:none" type="text" name="table_describe" id="table_describe" th:value="${tabledescribe}">
+        <input style="display:none" type="text" name="table_name" th:value="${tablename}">
+        <input style="display:none" id="len" type="text" name="len" th:value="1">
+        <input type="submit" name="edit" value="填报表格">
+    </form>
+</body>
+</html>

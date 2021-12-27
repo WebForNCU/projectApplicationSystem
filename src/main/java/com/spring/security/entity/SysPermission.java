@@ -1,5 +1,7 @@
 package com.spring.security.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -8,8 +10,10 @@ import java.io.Serializable;
  * @author makejava
  * @since 2019-08-29 21:13:29
  */
+@Entity(name = "sys_permission")
 public class SysPermission implements Serializable {
     private static final long serialVersionUID = -71969734644822184L;
+    @Id
     //主键id
     private Integer id;
     //权限code

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC ".//mybatis.org//DTD MAPPER 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.security.dao.ImageUrlDao">
+
+    <select id="queryUrlByNickname" parameterType="String" resultType="String">
+        select logininfo.head_img.imgUrl from logininfo.head_img where nickname=#{nickname}
+    </select>
+
+    <select id="updateUrlByNickname" parameterType="ImageUrl">
+        update logininfo.head_img set imgUrl=#{imgUrl} where nickname=#{nickname}
+    </select>
+
+    <insert id="insertNickname" parameterType="String">
+        insert into logininfo.head_img (nickname) value (#{nickname})
+    </insert>
+
+    <select id="queryImageUrlByNickname" parameterType="String" resultType="ImageUrl">
+        select * from logininfo.head_img where nickname=#{nickname}
+    </select>
+
+</mapper>
