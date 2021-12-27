@@ -16,6 +16,10 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="createUser" column="create_user" jdbcType="INTEGER"/>
         <result property="updateUser" column="update_user" jdbcType="INTEGER"/>
+        <result property="gender" column="gender" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="image" column="image" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
@@ -88,6 +92,19 @@
         values (#{account}, #{userName}, #{password}, #{lastLoginTime}, #{enabled}, #{accountNonExpired}, #{accountNonLocked}, #{credentialsNonExpired}, #{createTime}, #{updateTime})
     </insert>
 
+
+    <!--更新头像url-->
+    <update id="updateImage">
+        update sys_user
+        <set>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+        </set>
+            where id = #{id}
+    </update>
+
+
     <!--通过主键修改数据-->
     <update id="update">
         update sys_user
@@ -128,6 +145,15 @@
             <if test="updateUser != null">
                 update_user = #{updateUser},
             </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
         </set>
         where id = #{id}
     </update>
@@ -140,5 +166,10 @@
     <!--根据用户名查询用户-->
     <select id="selectByName" resultMap="SysUserMap">
         select * from sys_user where account = #{userName};
+    </select>
+
+    <!--查询所有用户信息（用户视图信息）-->
+    <select id="queryAllUsers" resultMap="SysUserMap">
+        select *from sys_user u inner join sys_user_role_relation r on u.id = r.user_id where r.role_id=2
     </select>
 </mapper>

@@ -61,9 +61,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="用户首页.html">
-                            <span><img src="assets/picture/avtar-1.jpg" class="img-circle" width="30" alt=""></span>
-                        </a>
+                       <!--获取用户名-->
+                        <td style="width: 300px" th:text="${username}"></td>   您好！
                     </li>
                 </ul>
             </div>
@@ -79,17 +78,17 @@
             <ul class="metisMenu nav" id="menu">
                 <!--                        <li class="nav-heading"><span>Navigation</span></li>-->
                 <li>
-                    <a href="用户首页.html"><i class="icon-home"></i> 首页 </a>
+                    <a href="/UserPage"><i class="icon-home"></i> 首页 </a>
                 </li>
                 <li>
                     <a href="javascript: void(0);" aria-expanded="true"><i class="icon-list"></i> 填报管理 <span class="fa arrow"></span></a>
                     <ul class="nav-second-level nav" aria-expanded="true">
-                        <li><a th:href="@{/filling}">我要填报</a></li>
-                        <li><a th:href="@{/queryMyFilling}">我的报表</a></li>
+                        <li><a th:href="@{/queryUserBatchList}">待填报表格</a></li>
+                        <li><a href="用户首页.html">我的报表</a></li>
                     </ul>
                 </li>
                 <li><a href=""><i class="icon-list"></i>报表查询与导出</a></li>
-                <li><a href=""><i class="icon-user"></i>个人资料管理</a></li>
+                <li><a href="/myProfile"><i class="icon-user"></i>完善个人资料</a></li>
                 </li>
             </ul>
         </div><!--nano content-->
@@ -106,7 +105,7 @@
             <!--面包屑导航-->
             <div class="col-sm-12 text-right">
                 <ol class="breadcrumb">
-                    <li><a href="javascript: void(0);"><i class="fa fa-home"></i></a></li>
+                    <li><a href="/UserPage"><i class="fa fa-home"></i></a></li>
                     <li>主页</li>
                 </ol>
             </div>

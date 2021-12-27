@@ -14,12 +14,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @Author: Hutengfei
@@ -45,6 +48,8 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         sysUser.setUpdateUser(sysUser.getId());
         sysUserService.update(sysUser);
 
+        String username = userDetails.getUsername();
+
         //设置重定向页面的url,默认起始为登录页面
         String  redirectUrl = "login";
         SysUserRoleRelation sysUserRoleRelation = sysUserRoleRelationService.queryRoleIdByUserId(sysUser.getId());
@@ -52,10 +57,10 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         int role_id = sysUserRoleRelation.getRoleId();
         //role_id=1 跳到管理员界面：/AdminPage
         if (role_id == 1)
-            redirectUrl = "AdminPage";
+            redirectUrl = "AdminPage"+"/"+username;
         //role_id=2 跳到用户界面： /UserPage
         else if (role_id == 2)
-            redirectUrl = "UserPage";
+            redirectUrl = "UserPage"+"/"+username;
 
         httpServletResponse.sendRedirect(redirectUrl);
 

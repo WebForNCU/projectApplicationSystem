@@ -1,12 +1,13 @@
 spring:
+  thymeleaf:
+    cache: false
   application:
     name: isoftstone-security
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/loginInfo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/loginInfo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=CTT
     username: root
-    password: 20020122grm
+    password: 123456
     hikari:
       minimum-idle: 5
       idle-timeout: 600000
@@ -18,8 +19,12 @@ spring:
       connection-test-query: SELECT 1
     thymeleaf:
         cache: false
-server:
-  port: 8080
+    driver-class-name=com:
+      mysql:
+        cj:
+          jdbc:
+            Driver:server:
+  port: 8081
 
 mybatis-plus:
   # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
@@ -54,3 +59,5 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+server:
+  port: 8085

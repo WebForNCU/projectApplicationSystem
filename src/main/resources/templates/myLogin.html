@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- meta data -->
@@ -60,10 +60,10 @@
         <div class="sign-content popup-in-content">
             <div class="popup-in-txt">
                 <h2>登 录</h2>
-
+                <!--th:action="@{/user/login1}-->
                 <div class="signin-form">
                     <!--表单 提交数据给当前页面-->
-                    <form action="/login" role="form" method="post">
+                    <form th:action="@{/login}" role="form" method="post">
                         <div class="form-group">
                             <label for="signin_form"><span class="glyphicon glyphicon-user"
                                                            style="color: rgb(140, 132, 251);"></span> 角色</label>
@@ -105,7 +105,7 @@
                             <div class="col-sm-12">
                                 <div class="signin-footer">
                                     <input class="btn signin_btn signin_btn_two" data-target=".signin_modal" data-toggle="modal"
-                                            type="submit" value="登 录" ><!--loginCheck决定进入用户界面还是管理员界面-->
+                                            type="submit" value="登 录" >
                                         <p>
                                             还没有账号？
                                             <a href="/register">注 册</a>
@@ -179,7 +179,7 @@
                 console.log("data is :" + result);
                 if (jsonData["data"]["token"]) {
                     localStorage.setItem("hcs", jsonData["data"]["token"]);
-                    window.location.href = "index.html";
+                    window.location.href = "UserPage.html";
                 } else {
                     console.log(jsonData["data"]["token"]);
                     alert("登录失败，请重试");

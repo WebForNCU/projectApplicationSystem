@@ -61,9 +61,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="管理员首页.html">
-                            <span><img src="assets/picture/avtar-1.jpg" class="img-circle" width="30" alt=""></span>
-                        </a>
+                        <!--获取用户名-->
+                        <td style="width: 300px" th:text="${username}"></td>   您好！
                     </li>
                 </ul>
             </div>
@@ -79,26 +78,16 @@
             <ul class="metisMenu nav" id="menu">
                 <!--                        <li class="nav-heading"><span>Navigation</span></li>-->
                 <li>
-                    <a href="管理员首页.html"><i class="icon-home"></i> 首页 </a>
+                    <a href="/AdminPage"><i class="icon-home"></i> 首页 </a>
                 </li>
-                <!-- <li>
-                    <a href="车队信息.html"><i class="icon-user"></i> 批次信息发布 </a>
-                </li> -->
-                <li>
-                    <a href="javascript: void(0);" aria-expanded="true"><i class="icon-list"></i> 信息发布 <span class="fa arrow"></span></a>
-                    <ul class="nav-second-level nav" aria-expanded="true">
-                        <li><a href="">批次信息发布</a></li>
-                        <li><a href="">填报信息发布</a></li>
-                        <!-- <li><a href="车队参会人员管理.html">参会人员管理</a></li> -->
-                    </ul>
-                </li>
+                <li><a th:href="@{/queryBatchList}"><i class="icon-list"></i>报表发布</a></li>
                 <li><a href=""><i class="icon-user"></i>填报信息审核</a></li>
                 <li><a href=""><i class="icon-user"></i>报表查询与导出</a></li>
                 <li>
                     <a href="javascript: void(0);" aria-expanded="true"><i class="icon-list"></i> 资料管理 <span class="fa arrow"></span></a>
                     <ul class="nav-second-level nav" aria-expanded="true">
-                        <li><a href="">个人资料管理</a></li>
-                        <li><a href="">用户资料管理</a></li>
+                        <li><a href="/AdminProfile">个人资料管理</a></li>
+                        <li><a href="/queryAllUsers">用户资料管理</a></li>
                     </ul>
                 </li>
             </ul>
@@ -116,7 +105,7 @@
             <!--面包屑导航-->
             <div class="col-sm-12 text-right">
                 <ol class="breadcrumb">
-                    <li><a href="javascript: void(0);"><i class="fa fa-home"></i></a></li>
+                    <li><a href="/AdminPage"><i class="fa fa-home"></i></a></li>
                     <li>主页</li>
                 </ol>
             </div>

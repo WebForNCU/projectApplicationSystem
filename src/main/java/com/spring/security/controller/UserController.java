@@ -12,9 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +33,8 @@ public class UserController {
     @Autowired
     SysUserRoleRelationService sysUserRoleRelationService;
 
+    private String username;
+    private String role;
     @ResponseBody
     @GetMapping("/getUser")
     public JsonResult getUser() {
@@ -53,14 +54,34 @@ public class UserController {
         return "myLogin";
     }
 
-    //用户界面
+
     @GetMapping("/UserPage")
-    public String UserPage()
-    {return "UserPage";}
-    //管理员界面
+    public String toUserPage(Model model)
+    {
+        model.addAttribute("username",this.username);
+        return "UserPage";
+    }
+    //用户界面
+    @GetMapping("/UserPage/{username}")
+    public String UserPage(@PathVariable String username)
+    {
+        this.username = username;
+        return "redirect:/UserPage";
+    }
+
     @GetMapping("/AdminPage")
-    public String AdminPage()
-    {return "AdminPage";}
+    public String toAdminPage(Model model)
+    {
+        model.addAttribute("username",this.username);
+        return "AdminPage";
+    }
+    //管理员界面
+    @GetMapping("/AdminPage/{username}")
+    public String AdminPage(@PathVariable String username)
+    {
+        this.username = username;
+        return "redirect:/AdminPage";
+    }
 
     //登录失败
     @GetMapping("/loginError")
@@ -119,6 +140,7 @@ public class UserController {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String role = request.getParameter("role");
+        System.out.println(role);
         //给密码加密
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -128,16 +150,138 @@ public class UserController {
 
         Integer userId = user.getId();
         //默认为用户
-        Integer roleId=2;
-        if (role == "管理员")
-            roleId=1;
-        else if (role == "用户")
-            roleId=2;
+        Integer roleId=(role.equals("admin"))?1:2;
         //向用户角色表中插入数据
        sysUserRoleRelationService.insert(new SysUserRoleRelation(userId,roleId));
         System.out.println("注册成功返回登录");
         return "myLogin";
     }
+    //完善个人资料页面
+    @GetMapping("/myProfile")
+    public String myProfile(Model model) {
+        model.addAttribute("username", username);
+        //查询该用户的角色：管理员还是用户
+        SysUser sysUser = sysUserService.selectByName(username);
+        SysUserRoleRelation userRoleRelation = sysUserRoleRelationService.queryRoleIdByUserId(sysUser.getId());
+        Integer roleId = userRoleRelation.getRoleId();
+        if (roleId==1)
+            role="管理员";
+        else
+            role="用户";
+        model.addAttribute("image",sysUser.getImage());
+        model.addAttribute("user",sysUser);
+        model.addAttribute("role",role);
+        return  "profile";
+    }
+
+    //完善用户信息
+    @PostMapping("/improveUser")
+    public String improveUser(HttpServletRequest request,Model model)
+    {
+        String gender = request.getParameter("gender");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        SysUser sysUser = sysUserService.selectByName(username);
+        System.out.println(sysUser.toString());
+        //更新用户
+        sysUser.setLastLoginTime(new Date());
+        sysUser.setUpdateTime(new Date());
+        sysUser.setUpdateUser(sysUser.getId());
+        //完善用户信息  没有更新头像！！
+        sysUser.setGender(gender);
+        sysUser.setEmail(email);
+        sysUser.setPhone(phone);
+        sysUser.setImage(sysUser.getImage());
+        sysUserService.update(sysUser);
+
+        model.addAttribute("role",role);
+        model.addAttribute("user",sysUser);
+        //跳转页面可以显示用户的基本信息
+        return "profile";
+    }
 
 
+    //管理员个人资料
+    //完善个人资料页面
+    @GetMapping("/AdminProfile")
+    public String AdminProfile(Model model) {
+        model.addAttribute("username", username);
+        //查询该用户的角色：管理员还是用户
+        SysUser sysUser = sysUserService.selectByName(username);
+        SysUserRoleRelation userRoleRelation = sysUserRoleRelationService.queryRoleIdByUserId(sysUser.getId());
+        Integer roleId = userRoleRelation.getRoleId();
+        if (roleId==1)
+            role="管理员";
+        else
+            role="用户";
+        model.addAttribute("user",sysUser);
+        model.addAttribute("role",role);
+        return  "AdminProfile";
+    }
+
+    //完善用户信息
+    @PostMapping("/improveAdmin")
+    public String improveAdmin(HttpServletRequest request,Model model)
+    {
+        String gender = request.getParameter("gender");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        SysUser sysUser = sysUserService.selectByName(username);
+        System.out.println(sysUser.toString());
+        //更新用户
+        sysUser.setLastLoginTime(new Date());
+        sysUser.setUpdateTime(new Date());
+        sysUser.setUpdateUser(sysUser.getId());
+        //完善用户信息
+        sysUser.setGender(gender);
+        sysUser.setEmail(email);
+        sysUser.setPhone(phone);
+        sysUserService.update(sysUser);
+        model.addAttribute("role",role);
+        model.addAttribute("user",sysUser);
+        //跳转页面可以显示用户的基本信息
+        return "AdminProfile";
+    }
+
+    //查询用户所有信息
+    @GetMapping("/queryAllUsers")
+    public String queryAllUsers(Model model)
+    {
+        List<SysUser> users = sysUserService.queryAllUsers();
+        model.addAttribute("users",users);
+        return "queryAllUsers";
+    }
+
+    //管理员功能：删除用户
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id)
+    {
+        sysUserService.deleteById(id);
+        sysUserRoleRelationService.delete(id);
+        return "redirect:/queryAllUsers";
+    }
+
+    //管理员功能：更新用户信息
+    @PostMapping("/updateUser")
+    public String updateUser(HttpServletRequest request)
+    {
+        String username = request.getParameter("username");
+        System.out.println(username);
+        String gender = request.getParameter("gender");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+
+        SysUser sysUser = sysUserService.selectByName(username);
+        //System.out.println(sysUser.toString());
+        //更新用户
+        sysUser.setLastLoginTime(new Date());
+        sysUser.setUpdateTime(new Date());
+        sysUser.setUpdateUser(sysUser.getId());
+        //完善用户信息
+        sysUser.setGender(gender);
+        sysUser.setEmail(email);
+        sysUser.setPhone(phone);
+        sysUserService.update(sysUser);
+        return "redirect:/queryAllUsers";
+    }
 }

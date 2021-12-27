@@ -19,6 +19,8 @@ public class SysUserServiceImpl implements SysUserService {
     @Resource
     private SysUserDao sysUserDao;
 
+
+
     /**
      * 通过ID查询单条数据
      *
@@ -66,6 +68,12 @@ public class SysUserServiceImpl implements SysUserService {
         return this.queryById(sysUser.getId());
     }
 
+    @Override
+    public SysUser updateImage(SysUser sysUser) {
+        this.sysUserDao.updateImage(sysUser);
+        return this.queryById(sysUser.getId());
+    }
+
     /**
      * 通过主键删除数据
      *
@@ -80,5 +88,10 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public SysUser selectByName(String userName) {
         return this.sysUserDao.selectByName(userName);
+    }
+
+    @Override
+    public List<SysUser> queryAllUsers() {
+        return this.sysUserDao.queryAllUsers();
     }
 }
