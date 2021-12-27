@@ -19,7 +19,7 @@ spring:
     thymeleaf:
         cache: false
 server:
-  port: 8081
+  port: 8080
 
 mybatis-plus:
   # 如果是放在src/main/java目录下 classpath:/com/yourpackage/*/mapper/*Mapper.xml
